@@ -1,0 +1,87 @@
+
+
+.main {
+    display: flex;
+}
+
+.calculator {
+    border: 8px solid green;
+    margin-left: auto;
+    margin-right:  auto;
+    margin-top: 50px;
+    width: 400px;
+    height: 600px;
+}
+
+.display-box {
+    border: 2px solid blue;
+    padding: 10px 0px 10px 0px;
+    width: 100%;
+    height: 20%;
+    text-align:right;
+    text-align: bottom;
+}
+
+.current-display {
+    display: block;
+    border: 2px solid orange;
+    height: 50%;
+}
+
+.displayed-digit {
+    display: block;
+    border: 2px solid purple;
+    height: 50%;
+}
+
+
+.button-container {
+    border: 2px solid red;
+    display: grid;
+    grid: repeat(5,1fr) / repeat(4,1fr);
+    width: 100%;
+    height: 75%;
+}
+
+.btn .btn-digits {
+    margin: 3px 3px 3px 3px;
+}
+
+
+
+/* .calculator-container {
+    border: 8px solid green;
+    margin-left: auto;
+    margin-right:  auto;
+    margin-top: 50px;
+    width: 400px;
+    height: 600px;
+
+    display: grid;
+    grid: 2fr repeat(5, 1fr) / repeat(4,1fr);
+}
+
+.display-box {
+    grid-area: 1/1/2/5;
+    border: 2px solid blue;
+}
+
+.button-container {
+    border: 2px solid red;
+    display: grid;
+    grid-area: 2/1/7/5;
+    grid: repeat(5,1fr) / repeat(3, 1fr) 1.5fr;
+}
+
+.button-digits {
+    display: grid;
+    grid-area: 1/1/6/4;
+    /* grid-auto-flow: column; */
+
+/* }
+
+.button-operators {
+    display: grid;
+    grid-area: 1/4/7/5;
+
+} */ */
