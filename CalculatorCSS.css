@@ -47,6 +47,9 @@
     margin: 3px 3px 3px 3px;
 }
 
+#zero {
+    grid-column: span 2;
+}
 
 
 /* .calculator-container {

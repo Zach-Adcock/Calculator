@@ -15,7 +15,8 @@ var num1,num2,operation ;
 const operate = () => {
     let int1 = parseInt(num1);
     let int2 = parseInt(num2);
-    if (typeof num1 !== 'undefined' && typeof num2 !== 'undefined' && typeof operation !== 'undefined'){
+    if (typeof num1 !== 'undefined' && typeof num2 !== 'undefined' && typeof operation !== 'undefined' 
+    && num1!== '' && num2 !== ''){
         currentDisplay.innerText = `${num1} ${operation} ${num2} =  `; //display top row - what is being calc'd
 
         switch (operation) {
@@ -46,7 +47,7 @@ var currentDigit = ''
 const digitButtons = document.querySelectorAll('.btn-digit');
 digitButtons.forEach(item => {
     item.addEventListener('click', () => {
-        currentDigit += item.id;
+        currentDigit += item.innerText;
         num2 = currentDigit;
         displayCurrentDigit.innerText = currentDigit;
     })
@@ -65,12 +66,16 @@ equalButton.addEventListener('click', operate);
 const operationButtons = document.querySelectorAll('.btn-operator');
 operationButtons.forEach(item => {
     item.addEventListener('click', () => {
-        num1 = currentDigit         //holds the first number to be calc'd
         operation = item.innerText; //sets current operator
-        currentDigit = '';          //resets input line to ''
+        if (num2 !== '' && num2 !== 'undefined'){
+            num1 = currentDigit; //holds the first number to be calc'd
+            num2 = '';         
+            currentDigit = '';          //resets input line to ''
+            currentDisplay.innerText = num1 + ' ' + operation;
+        }
         currentDisplay.innerText = num1 + ' ' + operation;
-
     })
+    
 });
 
 
@@ -100,4 +105,27 @@ oppositeNumber.addEventListener('click', () => {
         currentDisplay.innerText = num2;
         displayCurrentDigit.innerText = num2;
     }
-})
+});
+
+
+//set delete button - deletes one number at a time
+const deleteDigit = document.querySelector('#delete');
+deleteDigit.addEventListener('click', () => {
+    if (currentDigit !== '' && currentDigit !== 'undefined'){
+        if (currentDigit == '0') {
+            return
+        }
+        currentDigit = currentDigit.substring(0,-1);
+    } else if (num1 !== '' && num1 !== 'undefined') {
+        num1 = num1.substring(0,-1);
+    }
+});
+
+
+//test readouts
+function readouts() {
+    console.log('num1  ' + num1);
+    console.log('num2  ' + num2);
+    console.log('currentDigit  ' + currentDigit);
+    console.log('operation  ' + operation);
+};
