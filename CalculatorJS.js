@@ -2,7 +2,7 @@
 
 
 //initialize variables
-var num1,num2,operation ;
+var num1,num2,operation,decimalIndex ;
 
 //Basic calculation functions
 
@@ -34,32 +34,41 @@ const operate = () => {
 
         switch (operation) {
             case '+':
-                currentDigit = addition(int1, int2).toString();
+                currentDigit = addition(int1, int2);
                 break;
             case '-':
-                currentDigit = subtraction(int1, int2).toString();
+                currentDigit = subtraction(int1, int2);
                 break;
             case '*':
-                currentDigit = multiplication(int1, int2).toString();
+                currentDigit = multiplication(int1, int2);
                 break;
             case '/':
-                currentDigit = division(int1, int2).toString();
+                if (int2 != '0'){
+                currentDigit = division(int1, int2);
+                }
                 break;
             default: 
                 console.log('ERROR');
-        }
+        };
+      
         //Determine number of digits to round to
-        // if (currentDigit.indexOf('.') === -1){
-            
-        // } else if {
+        decimalIndex = currentDigit.toString().indexOf('.')
+        
+        if ((currentDigit.toString().length - decimalIndex) > 3){
+            currentDigit = currentDigit.toFixed(2);
+        };
+        currentDigit.toString();
 
-        // }
-
-
-
+        //remove zeros after the decimal
+        while (currentDigit[-1] == '0') {
+            currentDigit.slice(0,-1);
+        }
+        if (currentDigit[-1] == '.'){
+            currentDigit = currentDigit.slice(0,-1);
+        } 
+        
         //Display
         displayCurrentDigit.innerText = currentDigit;
-    
     }
 };
 
@@ -123,18 +132,18 @@ clearButton.addEventListener('click', () => {
 });
 
 //set =/- button
-const oppositeNumber = document.querySelector('#opposite');
-oppositeNumber.addEventListener('click', () => {
-    if (currentDigit[0] == '-'){
-        num2 = currentDigit = currentDigit.substring(1);
-        currentDisplay.innerText = num2;
-        displayCurrentDigit.innerText = num2;
-    } else {
-        num2 = currentDigit = '-' + currentDigit;
-        currentDisplay.innerText = num2;
-        displayCurrentDigit.innerText = num2;
-    }
-});
+// const oppositeNumber = document.querySelector('#opposite');
+// oppositeNumber.addEventListener('click', () => {
+//     if (currentDigit[0] == '-'){
+//         num2 = currentDigit = currentDigit.substring(1);
+//         currentDisplay.innerText = num2;
+//         displayCurrentDigit.innerText = num2;
+//     } else {
+//         num2 = currentDigit = '-' + currentDigit;
+//         currentDisplay.innerText = num2;
+//         displayCurrentDigit.innerText = num2;
+//     }
+// });
 
 
 //set delete button - deletes one number at a time
