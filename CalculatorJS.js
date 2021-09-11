@@ -45,6 +45,10 @@ const operate = () => {
             case '/':
                 if (int2 != '0'){
                 currentDigit = division(int1, int2);
+                } else {
+                    alert('Cannot divide by zero!');
+                    currentDigit = num1 = num2 = '';
+                    currentDisplay.innerText = '';
                 }
                 break;
             default: 
@@ -63,7 +67,7 @@ const operate = () => {
         while (currentDigit[-1] == '0') {
             currentDigit.slice(0,-1);
         }
-        if (currentDigit[-1] == '.'){
+        if (currentDigit[currentDigit.length -1] == '.'){
             currentDigit = currentDigit.slice(0,-1);
         } 
         
