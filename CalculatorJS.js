@@ -1,22 +1,35 @@
 //JS for The Odin Project calculator
 
 
+//initialize variables
+var num1,num2,operation ;
+
 //Basic calculation functions
 
-const addition = (num1, num2) => num1 + num2;
-const subtraction = (num1, num2) => num1 - num2;
+const addition = (num1, num2) =>  num1 + num2;
+const subtraction = (num1, num2) => {
+    if (isNaN(num1)){
+        num1 = 0;
+    }
+    return num1 - num2;
+    
+};
 const multiplication = (num1, num2) => num1 * num2;
 const division = (num1, num2) => num1/num2;
 
 //Operator function - uses the current operation, and the numbers input
 //before/after the operator
-var num1,num2,operation ;
 
 const operate = () => {
-    let int1 = parseInt(num1);
-    let int2 = parseInt(num2);
-    if (typeof num1 !== 'undefined' && typeof num2 !== 'undefined' && typeof operation !== 'undefined' 
-    && num1!== '' && num2 !== ''){
+    let int1 = parseFloat(num1);
+    let int2 = parseFloat(num2);
+    if (typeof operation !== 'undefined'){
+        if (num1 == ''){
+            num1 = 0;
+        };
+        if (num2 == ''){
+            num2 = currentDigit = 0;
+        };
         currentDisplay.innerText = `${num1} ${operation} ${num2} =  `; //display top row - what is being calc'd
 
         switch (operation) {
@@ -35,6 +48,16 @@ const operate = () => {
             default: 
                 console.log('ERROR');
         }
+        //Determine number of digits to round to
+        // if (currentDigit.indexOf('.') === -1){
+            
+        // } else if {
+
+        // }
+
+
+
+        //Display
         displayCurrentDigit.innerText = currentDigit;
     
     }
@@ -47,9 +70,15 @@ var currentDigit = ''
 const digitButtons = document.querySelectorAll('.btn-digit');
 digitButtons.forEach(item => {
     item.addEventListener('click', () => {
-        currentDigit += item.innerText;
-        num2 = currentDigit;
-        displayCurrentDigit.innerText = currentDigit;
+        if (currentDigit == '0'){
+            num1 = item.innerText;
+            currentDigit = item.innerText;
+            displayCurrentDigit.innerText = currentDigit;
+        } else {
+            currentDigit += item.innerText;
+            num2 = currentDigit;
+            displayCurrentDigit.innerText = currentDigit;
+        }
     })
 });
 
@@ -86,11 +115,11 @@ currentDisplay = document.querySelector('.current-display');
 const clearButton = document.querySelector('#AC');
 clearButton.addEventListener('click', () => {
     currentDisplay.innerText = '';
-    displayCurrentDigit.innerText = '';
     num1 ='';
     num2 ='';
     operation ='';
-    currentDigit = '0';
+    currentDigit = '';
+    displayCurrentDigit.innerText = '0';
 });
 
 //set =/- button
@@ -111,15 +140,44 @@ oppositeNumber.addEventListener('click', () => {
 //set delete button - deletes one number at a time
 const deleteDigit = document.querySelector('#delete');
 deleteDigit.addEventListener('click', () => {
-    if (currentDigit !== '' && currentDigit !== 'undefined'){
-        if (currentDigit == '0') {
-            return
+    if (displayCurrentDigit.innerText != '' && displayCurrentDigit.innerText != 'undefined' 
+    && displayCurrentDigit.innerText != '0') {
+        if (currentDigit[0] == '-' && currentDigit.length == 2) {
+        num2 = currentDigit = '';
+        displayCurrentDigit.innerText = currentDigit;
+        } else {
+            num2 = currentDigit = displayCurrentDigit.innerText.slice(0,-1);
+            displayCurrentDigit.innerText = currentDigit;
         }
-        currentDigit = currentDigit.substring(0,-1);
-    } else if (num1 !== '' && num1 !== 'undefined') {
-        num1 = num1.substring(0,-1);
     }
 });
+
+
+const decimalButton = document.querySelector('#decimal');
+decimalButton.addEventListener('click', () => {
+    if (currentDigit.indexOf('.') !== -1){
+        return
+    } else if (blankSlate() || (num2 =='' && currentDigit =='')){
+        num2 = currentDigit = '.';
+        displayCurrentDigit.innerText = currentDigit;
+    } else {
+        currentDigit += '.';
+        num2 = currentDigit;
+        displayCurrentDigit.innerText = currentDigit;
+    } 
+});
+
+
+
+//Checks for blank slate
+function blankSlate() {
+    if ((num1 == '' || num1 === undefined) && (num2 == '' || num2 === undefined) 
+    && (currentDigit == '' || currentDigit === undefined) && (operation == '' || operation === undefined)){
+        return true
+    } else {
+        return false
+    }
+};
 
 
 //test readouts
