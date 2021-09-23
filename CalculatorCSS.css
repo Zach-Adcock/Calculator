@@ -64,6 +64,11 @@ button {
     background-color: rgb(144, 148, 148);
 
 }
+
+.btn-operator:hover, #equal-sign:hover,#delete:hover, #decimal:hover {
+    background-color: rgb(184, 181, 181);
+}
+
 .btn .btn-digit {
     margin: 3px 3px 3px 3px;
 }
@@ -74,6 +79,9 @@ button {
 .btn-digit {
     background-color: rgb(69, 189, 219);
 }
+.btn-digit:hover {
+    background-color: rgb(26, 124, 148);
+}
 
 #zero, #AC {
     grid-column: span 2;
@@ -82,7 +90,9 @@ button {
 #AC {
     background-color: rgb(224, 92, 92);
 }
-
+#AC:hover {
+    background-color: rgb(218, 132, 132);
+}
 #decimal {
     font-size: 28px;
 }
