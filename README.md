@@ -1,3 +1,3 @@
 # Calculator
 
-Basic Calculator: https://decoderwring.github.io/Calculator/
+Basic Calculator: https://zach-adcock.github.io/Calculator/
